@@ -28,11 +28,12 @@ func main() {
 
 	// Create the grpc client
 	client := pb.NewUserServiceClient(conn)
+
+	// Creating the context to use
 	ctx, canel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer canel()
 
-	// call crate method
-
+	// call create method
 	createResp, cErr := client.Create(ctx, &pb.CreateUserRequest{
 		Name:  "John Doe",
 		Email: "john@example.com",
@@ -43,10 +44,24 @@ func main() {
 	}
 
 	newData := &pb.UserProfileResponse{
-		Id: createResp.GetId(),
-		Name: createResp.GetName(),
+		Id:    createResp.GetId(),
+		Name:  createResp.GetName(),
 		Email: createResp.GetEmail(),
 	}
 
 	log.Printf("create response: %v", newData)
+
+	// call get method
+	userID := "userID"
+
+	getRespo, gErr := client.Get(ctx, &pb.SingleUserRequest{
+		Id: userID,
+	})
+
+	if gErr != nil {
+		log.Fatalf("Get error: %v", gErr)
+	}
+
+	log.Printf("get response: %v", getRespo)
+
 }
