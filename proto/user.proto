@@ -3,7 +3,7 @@ option go_package = "github.com/dawit_hopes/grpc_micro_service/proto/user;user";
 
 service UserService {
   rpc Get (SingleUserRequest) returns (UserProfileResponse);
-  rpc Create (CreateUserRequest) returns (SuccessResponse);
+  rpc Create (CreateUserRequest) returns (UserProfileResponse);
   rpc Update (UpdateUserRequest) returns (SuccessResponse);
   rpc Delete (SingleUserRequest) returns (SuccessResponse);
 }

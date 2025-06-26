@@ -30,7 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	Get(ctx context.Context, in *SingleUserRequest, opts ...grpc.CallOption) (*UserProfileResponse, error)
-	Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
+	Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*UserProfileResponse, error)
 	Update(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 	Delete(ctx context.Context, in *SingleUserRequest, opts ...grpc.CallOption) (*SuccessResponse, error)
 }
@@ -53,9 +53,9 @@ func (c *userServiceClient) Get(ctx context.Context, in *SingleUserRequest, opts
 	return out, nil
 }
 
-func (c *userServiceClient) Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*SuccessResponse, error) {
+func (c *userServiceClient) Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*UserProfileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SuccessResponse)
+	out := new(UserProfileResponse)
 	err := c.cc.Invoke(ctx, UserService_Create_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -88,7 +88,7 @@ func (c *userServiceClient) Delete(ctx context.Context, in *SingleUserRequest, o
 // for forward compatibility.
 type UserServiceServer interface {
 	Get(context.Context, *SingleUserRequest) (*UserProfileResponse, error)
-	Create(context.Context, *CreateUserRequest) (*SuccessResponse, error)
+	Create(context.Context, *CreateUserRequest) (*UserProfileResponse, error)
 	Update(context.Context, *UpdateUserRequest) (*SuccessResponse, error)
 	Delete(context.Context, *SingleUserRequest) (*SuccessResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
@@ -104,7 +104,7 @@ type UnimplementedUserServiceServer struct{}
 func (UnimplementedUserServiceServer) Get(context.Context, *SingleUserRequest) (*UserProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedUserServiceServer) Create(context.Context, *CreateUserRequest) (*SuccessResponse, error) {
+func (UnimplementedUserServiceServer) Create(context.Context, *CreateUserRequest) (*UserProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedUserServiceServer) Update(context.Context, *UpdateUserRequest) (*SuccessResponse, error) {

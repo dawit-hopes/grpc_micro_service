@@ -301,10 +301,10 @@ const file_user_proto_rawDesc = "" +
 	"\x11UpdateUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email2\xce\x01\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email2\xd2\x01\n" +
 	"\vUserService\x12/\n" +
-	"\x03Get\x12\x12.SingleUserRequest\x1a\x14.UserProfileResponse\x12.\n" +
-	"\x06Create\x12\x12.CreateUserRequest\x1a\x10.SuccessResponse\x12.\n" +
+	"\x03Get\x12\x12.SingleUserRequest\x1a\x14.UserProfileResponse\x122\n" +
+	"\x06Create\x12\x12.CreateUserRequest\x1a\x14.UserProfileResponse\x12.\n" +
 	"\x06Update\x12\x12.UpdateUserRequest\x1a\x10.SuccessResponse\x12.\n" +
 	"\x06Delete\x12\x12.SingleUserRequest\x1a\x10.SuccessResponseB;Z9github.com/dawit_hopes/grpc_micro_service/proto/user;userb\x06proto3"
 
@@ -334,7 +334,7 @@ var file_user_proto_depIdxs = []int32{
 	4, // 2: UserService.Update:input_type -> UpdateUserRequest
 	0, // 3: UserService.Delete:input_type -> SingleUserRequest
 	3, // 4: UserService.Get:output_type -> UserProfileResponse
-	2, // 5: UserService.Create:output_type -> SuccessResponse
+	3, // 5: UserService.Create:output_type -> UserProfileResponse
 	2, // 6: UserService.Update:output_type -> SuccessResponse
 	2, // 7: UserService.Delete:output_type -> SuccessResponse
 	4, // [4:8] is the sub-list for method output_type
