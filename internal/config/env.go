@@ -8,6 +8,7 @@ import (
 
 type Env struct {
 	MongoDBConnectionString string `env:"MONGODB_CONNECTION_STRING,required"`
+	ServerAddress string `env:"SERVER_ADDRESS,required"`
 }
 
 func NewEnv() *Env {

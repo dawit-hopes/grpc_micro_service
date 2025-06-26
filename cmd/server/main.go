@@ -12,6 +12,7 @@ import (
 	"github.com/dawit_hopes/grpc_micro_service/pkg/v1/usecase"
 	"go.mongodb.org/mongo-driver/mongo"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
@@ -23,13 +24,14 @@ func main() {
 	}
 
 	// add a listent address
-	lis, lErr := net.Listen("tcp", ":8080")
+	lis, lErr := net.Listen("tcp", env.ServerAddress)
 	if lErr != nil {
 		log.Fatalf("ERROR STARTING THE SERVER : %v", lErr)
 	}
 
 	// start the grpc server
 	grpcServer := grpc.NewServer()
+	reflection.Register(grpcServer)
 
 	// get the user usecase
 	userUsecase := initUserServer(client)
@@ -38,6 +40,7 @@ func main() {
 	handler.NewServer(grpcServer, userUsecase)
 
 	// start the server
+	log.Printf("✅ gRPC server running at %s", env.ServerAddress)
 	log.Fatal(grpcServer.Serve(lis))
 }
 
