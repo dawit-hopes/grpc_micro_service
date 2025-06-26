@@ -20,8 +20,8 @@ func (u *userUseCase) Create(user models.User) error {
 func (u *userUseCase) Get(id string) (models.User, error) {
 	return u.repo.Get(id)
 }
-func (u *userUseCase) Update(user models.User) error {
-	return u.repo.Update(user)
+func (u *userUseCase) Update(id string, user models.User) error {
+	return u.repo.Update(id, user)
 }
 func (u *userUseCase) Delete(id string) error {
 	return u.repo.Delete(id)

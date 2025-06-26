@@ -41,8 +41,8 @@ func (r *userRepository) Get(id string) (models.User, error) {
 	return user, nil
 }
 
-func (r *userRepository) Update(user models.User) error {
-	objID, err := primitive.ObjectIDFromHex(user.ID.Hex())
+func (r *userRepository) Update(id string, user models.User) error {
+	objID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return err
 	}

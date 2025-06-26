@@ -7,7 +7,7 @@ import "github.com/dawit_hopes/grpc_micro_service/internal/domain/models"
 type RepoInterface interface {
 	Create(models.User) error
 	Get(id string) (models.User, error)
-	Update(models.User) error
+	Update(id string, user models.User) error
 	Delete(id string) error
 }
 
@@ -15,6 +15,6 @@ type RepoInterface interface {
 type UseCaseInterface interface {
 	Create(models.User) error
 	Get(id string) (models.User, error)
-	Update(models.User) error
+	Update(id string, user models.User) error
 	Delete(id string) error
 }

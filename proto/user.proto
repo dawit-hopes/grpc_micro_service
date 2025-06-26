@@ -4,7 +4,7 @@ option go_package = "github.com/dawit_hopes/grpc_micro_service/proto/user;user";
 service UserService {
   rpc Get (SingleUserRequest) returns (UserProfileResponse);
   rpc Create (CreateUserRequest) returns (SuccessResponse);
-  rpc Update (SingleUserRequest) returns (SuccessResponse);
+  rpc Update (UpdateUserRequest) returns (SuccessResponse);
   rpc Delete (SingleUserRequest) returns (SuccessResponse);
 }
 
@@ -22,6 +22,12 @@ message SuccessResponse {
 }
 
 message UserProfileResponse {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message UpdateUserRequest {
   string id = 1;
   string name = 2;
   string email = 3;
