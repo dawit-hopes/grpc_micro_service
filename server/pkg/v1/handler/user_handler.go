@@ -33,20 +33,18 @@ func (srv *UserHandler) transformUserModel(user models.User) *pb.UserProfileResp
 	return &pb.UserProfileResponse{Name: user.Name, Email: user.Email, Id: user.ID.Hex()}
 }
 
-func (srv *UserHandler) Create(ctx context.Context, req *pb.CreateUserRequest) (*pb.SuccessResponse, error) {
+func (srv *UserHandler) Create(ctx context.Context, req *pb.CreateUserRequest) (*pb.UserProfileResponse, error) {
 	data := srv.transformUserRPC(req)
 
 	if data.Email == "" || data.Name == "" {
 		return nil, status.Errorf(codes.InvalidArgument, "all fields must be provided")
 	}
-
-	if err := srv.usecase.Create(data); err != nil {
+	newUser, err := srv.usecase.Create(data);
+	if err != nil {
 		return nil, err
 	}
 
-	return &pb.SuccessResponse{
-		Message: "Successfuly created a user",
-	}, nil
+	return srv.transformUserModel(*newUser), nil
 }
 
 func (srv *UserHandler) Get(ctx context.Context, req *pb.SingleUserRequest) (*pb.UserProfileResponse, error) {

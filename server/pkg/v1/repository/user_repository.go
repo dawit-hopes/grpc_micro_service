@@ -20,12 +20,14 @@ func NewUserRepository(db *mongo.Collection) interfaces.RepoInterface {
 	return &userRepository{db: db, ctx: context.Background()}
 }
 
-func (r *userRepository) Create(user models.User) error {
+func (r *userRepository) Create(user models.User) (*models.User, error) {
+	newID := primitive.NewObjectID()
+	user.ID = newID
 	_, err := r.db.InsertOne(r.ctx, user)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return &user, nil
 }
 
 func (r *userRepository) Get(id string) (models.User, error) {

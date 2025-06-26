@@ -8,6 +8,7 @@ import (
 
 type Env struct {
 	ServerAddress string `env:"SERVER_ADDRESS,required"`
+	Serverhost    string `env:"SERVER_HOST,required"`
 }
 
 func NewEnv() *Env {

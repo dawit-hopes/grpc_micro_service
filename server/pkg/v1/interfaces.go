@@ -5,7 +5,7 @@ import "github.com/dawit_hopes/grpc_micro_service/internal/domain/models"
 
 // RepoInterface defines the interface for repository methods.
 type RepoInterface interface {
-	Create(models.User) error
+	Create(models.User) (*models.User, error)
 	Get(id string) (models.User, error)
 	Update(id string, user models.User) error
 	Delete(id string) error
@@ -13,7 +13,7 @@ type RepoInterface interface {
 
 // UseCaseInterface defines the interface for usecase methods.
 type UseCaseInterface interface {
-	Create(models.User) error
+	Create(models.User) (*models.User, error)
 	Get(id string) (models.User, error)
 	Update(id string, user models.User) error
 	Delete(id string) error
