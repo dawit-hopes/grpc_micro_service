@@ -1,4 +1,4 @@
-// Package config implements the struct to read envs
+// Package config env configures the env variables
 package config
 
 import (
@@ -7,7 +7,6 @@ import (
 )
 
 type Env struct {
-	MongoDBConnectionString string `env:"MONGODB_CONNECTION_STRING,required"`
 	ServerAddress string `env:"SERVER_ADDRESS,required"`
 }
 
